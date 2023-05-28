@@ -1,0 +1,82 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 11px 1rem -5px rgba(0, 0, 0, .1);
+    transition: all .3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 11px 1rem -5px rgba(0, 0, 0, .2);
+    transform: translateY(-.5rem);
+}
+
+.card__top_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+
+.card__top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.card__top_id {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+}
+
+.card__top_name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+}
+
+.card__top_date {
+    font-size: 1rem;
+    font-weight: 100;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.card__content {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    padding: .2rem 2rem;
+    font-weight: 500;
+}
+
+.card__stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    padding: .5rem 2rem;
+    gap: .2rem;
+    font-size: 1.2rem;
+}

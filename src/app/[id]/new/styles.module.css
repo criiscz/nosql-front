@@ -1,0 +1,96 @@
+.newCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem 3rem;
+    border-radius: 5px;
+    box-shadow: 0 11px 11px -5px rgba(5, 5, 5, 0.1);
+    font-family: 'Inter', sans-serif;
+    background: #FCFCFC;
+    min-width: 30rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.newCard h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.newCard form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #FCFCFC;
+}
+
+.formGroup_h {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.formGroup_h .formGroup {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.formGroup label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formGroup input {
+    padding: .5rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.formGroup input:focus {
+    outline: none;
+}
+
+.formGroup textarea {
+    padding: .5rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.formGroup textarea:focus {
+    outline: none;
+}
+
+.formGroup button {
+    padding: .5rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 5rem;
+    background: #4bd37b;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+

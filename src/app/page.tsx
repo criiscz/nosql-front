@@ -1,95 +1,106 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import styles from './style.module.css'
+import SearchBar from "@/app/components/SearchBar/SearchBar";
+import {Icon} from '@iconify/react';
+import {useEffect, useState} from "react";
+import {useQuery} from "react-query";
+import {getAllProducts} from "@/api/Products";
+import {Product} from "@/models/Product";
+import dynamic from "next/dynamic";
+import ProgressBar from "@/app/components/LoadingBar/ProgressBar";
+import {useRouter} from "next/navigation";
+import Link from "next/link";
+
+
+const Card = dynamic(() => import("@/app/components/CardProduct/Card"), {ssr: false});
 
 export default function Home() {
+
+  const router = useRouter()
+
+  const [products, setProducts] = useState(
+    localStorage.getItem('products')
+      ? JSON.parse(localStorage.getItem('products') || '')
+      : []
+  )
+
+  const [filteredProducts, setFilteredProducts] = useState(products)
+  const [search, setSearch] = useState('')
+  const [progressValue, setProgressValue] = useState(0)
+
+  const {isFetching} = useQuery(
+    'products',
+    () => getAllProducts(),
+    {
+      onSuccess: (data) => {
+        setProducts(data)
+        setFilteredProducts(data)
+        localStorage.setItem('products', JSON.stringify(data))
+      },
+    }
+  )
+
+  useEffect(() => {
+    if (products.length <= 0) {
+      calculateProgress()
+    }
+    document.title = 'Productos'
+  }, [products])
+
+  const searchProduct = (name: string) => {
+    if (name == '') {
+      setFilteredProducts(products)
+      return
+    }
+    const filteredProducts = products.filter((product: Product) => {
+      if (product.product_name === undefined && product.productName === undefined) return false
+      if (product.product_name?.toLowerCase().includes(name.toLowerCase()) ||
+        product.productName?.toLowerCase().includes(name.toLowerCase())
+      ) return true
+    })
+    setFilteredProducts(filteredProducts)
+  }
+
+  const calculateProgress = () => {
+    const percent = 1
+    let progress = 0
+    const interval = setInterval(() => {
+      progress += percent
+      console.log(percent)
+      setProgressValue(progress)
+      if (progress >= 100) {
+        clearInterval(interval)
+      }
+    }, 85)
+  }
+
+  const selectProduct = (id: number) => {
+    router.push(`/${id}`)
+  }
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <header className={styles.header}>
+        <h1>Buscar Productos</h1>
+        <SearchBar placeholder={'Buscar Productos'} onChange={searchProduct}/>
+      </header>
+      <section className={styles.body}>
+        <Link href={'/new-product'} className={styles.body__createProduct}>
+          <Icon icon={'ri:add-circle-fill'}/>
+          <span>Crear Producto</span>
+        </Link>
+        <div className={styles.body__products}>
+          {
+            (isFetching && products.length == 0) && (
+              <ProgressBar value={progressValue} maxValue={100} minValue={0} label={'Cargando productos'}/>) ||
+            (filteredProducts.length == 0 && search.length > 0) && <div>No se encontraron productos</div> ||
+            filteredProducts.slice(0, 1500).map((product: Product) => {
+              return <Card key={product.index} product={product} onClick={selectProduct}/>
+            })
+          }
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
   )
 }
+

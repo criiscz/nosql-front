@@ -1,0 +1,143 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100%;
+  background: white;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.home_icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  padding: 3rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 1rem;
+    background: #FCFCFC;
+    border-radius: 1rem;
+    padding: 3rem 5rem;
+    margin-bottom: 3rem;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1rem;
+}
+
+.form__group label {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+
+.form__group input {
+    width: 100%;
+    height: 3rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+
+.form__group input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 50%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+
+.form__group textarea {
+    width: 100%;
+    height: 10rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+
+.form__group select {
+    width: 100%;
+    height: 3rem;
+    border: 1px solid #E6E6E6;
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+
+.form__group button {
+    height: 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    padding: .5rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    background: #4bd37b;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.form__group:last-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.form__group button:hover {
+    background: #3cb46e;
+}
