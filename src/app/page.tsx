@@ -19,7 +19,7 @@ export default function Home() {
   const router = useRouter()
 
   const [products, setProducts] = useState(
-    localStorage.getItem('products')
+    typeof window!=='undefined' && localStorage.getItem('products')
       ? JSON.parse(localStorage.getItem('products') || '')
       : []
   )
